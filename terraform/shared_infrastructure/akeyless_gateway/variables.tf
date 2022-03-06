@@ -1,44 +1,60 @@
 variable "name" {
   type        = string
-  description = "The name for this shared infrastructure"
+  description = "The name of the infrastructure"
 }
 
-variable "availability_zone_names" {
-  type        = list(string)
-  description = "List of availability zone names to use"
-}
-
-variable "vpc_flow_log_bucket_name" {
+################
+## Networking ##
+################
+variable "vpc_id" {
   type        = string
-  description = "Name of an S3 bucket to store VPC flow logs in"
-  default     = ""
+  description = "The ID of the VPC that the gateway will live in"
 }
 
+variable "public_subnet_ids" {
+  type        = list(any)
+  description = "A list of the public subnet ids to put the load balancer in"
+}
+
+variable "private_subnet_ids" {
+  type        = list(any)
+  description = "A list of the private subnet ids to put the ECS tasks in"
+}
+
+#########
+## DNS ##
+#########
 variable "route_53_hosted_zone_name" {
   type        = string
   description = "The name of the Route53 hosted zone that the gateway domain will belong to"
 }
 
-variable "akeyless_gateway_domain_name" {
+variable "domain_name" {
   type        = string
   description = "The name of the domain to host the gateway on"
 }
 
-variable "akeyless_gateway_iam_role_arn" {
+#############
+## Gateway ##
+#############
+variable "iam_role_arn" {
   type        = string
-  description = "The ARN of the IAM role to attach to the gateway.  Should correspond to the bound ARN of the admin access id."
+  description = "The ARN of the IAM role to attach to the gateway.  Should correspond to the bound ARN of the admin access id"
 }
 
-variable "akeyless_gateway_admin_access_id" {
+variable "admin_access_id" {
   type        = string
   description = "The access id that the AKeyless Gateway will use for admin access (see https://docs.akeyless.io/docs/install-and-configure-the-gateway)"
 }
 
-variable "akeyless_gateway_allowed_access_ids" {
+variable "allowed_access_ids" {
   type        = string
   description = "The access ids that can be used to configure the AKeyless Gateway (see https://docs.akeyless.io/docs/install-and-configure-the-gateway)"
 }
 
+##########
+## Misc ##
+##########
 variable "alb_access_logs_bucket_name" {
   type        = string
   description = "The name of the S3 bucket to store access logs for the ALB in"
@@ -47,6 +63,5 @@ variable "alb_access_logs_bucket_name" {
 
 variable "tags" {
   type        = map(string)
-  description = "Tags to attach to all resources"
-  default     = {}
+  description = "Tags to apply to all relevant pieces of infrastructure"
 }
