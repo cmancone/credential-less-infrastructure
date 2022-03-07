@@ -1,6 +1,16 @@
 variable "name" {
   type        = string
   description = "The name of the infrastructure"
+
+  validation {
+    condition     = length(var.name) > 32
+    error_message = "The name must be 32 characters or less to comply with ALB naming requirements."
+  }
+
+  validation {
+    condition     = can(regex("^[0-9A-Za-z-]+$", var.name))
+    error_message = "The name can only contain letters, numbers, and hyphens in order to comply with ALB naming requirements."
+  }
 }
 
 ################
@@ -12,13 +22,19 @@ variable "vpc_id" {
 }
 
 variable "public_subnet_ids" {
-  type        = list(any)
+  type        = list(string)
   description = "A list of the public subnet ids to put the load balancer in"
 }
 
 variable "private_subnet_ids" {
-  type        = list(any)
+  type        = list(string)
   description = "A list of the private subnet ids to put the ECS tasks in"
+}
+
+variable "gateway_ports" {
+  type        = map(number)
+  description = "A map for port mapping.  The key tells what port to open on the ALB and the value is which port to route it to on the gateway."
+  default     = { 8000 : 8000, 18888 : 18888, 8200 : 8200, 8080 : 8080, 5696 : 5696 }
 }
 
 #########
@@ -59,6 +75,12 @@ variable "alb_access_logs_bucket_name" {
   type        = string
   description = "The name of the S3 bucket to store access logs for the ALB in"
   default     = ""
+}
+
+variable "ssl_policy" {
+  type        = string
+  description = "The AWS SSL policy to use"
+  default     = "ELBSecurityPolicy-TLS-1-2-2017-01"
 }
 
 variable "tags" {
