@@ -38,6 +38,22 @@ variable "certificate_arn" {
   description = "The ARN of the ACM certificate to associate with the listener"
 }
 
+variable "lb_security_group_id" {
+  type        = string
+  description = "The ID of the security group used by the load balancer"
+}
+
+variable "ecs_tasks_security_group_id" {
+  type        = string
+  description = "The ID of the security group used by the ECS tasks"
+}
+
+variable "security_group_allowed_cidr_blocks" {
+  type        = list(string)
+  description = "List of CIDR blocks to whitelist incoming traffic from in the security group"
+  default     = ["0.0.0.0/0"]
+}
+
 variable "ssl_policy" {
   type        = string
   description = "The AWS SSL policy to use"

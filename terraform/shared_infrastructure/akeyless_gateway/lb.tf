@@ -17,12 +17,29 @@ resource "aws_lb" "gateway" {
 module "lb_listener" {
   source = "./lb_listener"
 
-  for_each          = var.gateway_ports
-  name              = var.name
-  vpc_id            = var.vpc_id
-  load_balancer_arn = aws_lb.gateway.arn
-  internet_port     = each.key
-  container_port    = each.value
-  certificate_arn   = aws_acm_certificate_validation.cert_validation.certificate_arn
-  ssl_policy        = var.ssl_policy
+  for_each                    = var.gateway_ports
+  name                        = var.name
+  vpc_id                      = var.vpc_id
+  load_balancer_arn           = aws_lb.gateway.arn
+  internet_port               = each.key
+  container_port              = each.value
+  certificate_arn             = aws_acm_certificate_validation.cert_validation.certificate_arn
+  ssl_policy                  = var.ssl_policy
+  lb_security_group_id        = aws_security_group.lb.id
+  ecs_tasks_security_group_id = aws_security_group.ecs_tasks.id
+}
+
+resource "aws_security_group" "lb" {
+  name        = var.name
+  description = "Security group for the ${var.name} ALB"
+  vpc_id      = var.vpc_id
+}
+
+resource "aws_security_group_rule" "lb_allow_all_outbound" {
+  type              = "egress"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.lb.id
 }

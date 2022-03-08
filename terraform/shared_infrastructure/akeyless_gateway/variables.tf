@@ -37,6 +37,12 @@ variable "gateway_ports" {
   default     = { 8000 : 8000, 18888 : 18888, 8200 : 8200, 8080 : 8080, 5696 : 5696 }
 }
 
+variable "security_group_allowed_cidr_blocks" {
+  type        = list(string)
+  description = "List of CIDR blocks to whitelist incoming traffic from in the security group"
+  default     = ["0.0.0.0/0"]
+}
+
 #########
 ## DNS ##
 #########
@@ -71,6 +77,12 @@ variable "allowed_access_ids" {
 ##########
 ## Misc ##
 ##########
+variable "desired_task_count" {
+  type        = number
+  description = "The desired number of ECS tasks to run for the gateway"
+  default     = 1
+}
+
 variable "alb_access_logs_bucket_name" {
   type        = string
   description = "The name of the S3 bucket to store access logs for the ALB in"

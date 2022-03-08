@@ -1,0 +1,65 @@
+[
+  {
+    "portMappings": [
+      {
+        "hostPort": 8000,
+        "containerPort": 8000,
+        "protocol": "tcp"
+      },
+      {
+        "hostPort": 18888,
+        "containerPort": 18888,
+        "protocol": "tcp"
+      },
+      {
+        "hostPort": 8200,
+        "containerPort": 8200,
+        "protocol": "tcp"
+      },
+      {
+        "hostPort": 8080,
+        "containerPort": 8080,
+        "protocol": "tcp"
+      },
+      {
+        "hostPort": 8081,
+        "containerPort": 8081,
+        "protocol": "tcp"
+      },
+      {
+        "hostPort": 5696,
+        "containerPort": 5696,
+        "protocol": "tcp"
+      }
+    ],
+    "mountPoints": [
+      {
+        "readOnly": null,
+        "containerPath": "/var/akeyless/conf",
+        "sourceVolume": "config-storage"
+      },
+      {
+        "readOnly": null,
+        "containerPath": "/var/log/akeyless",
+        "sourceVolume": "log-storage"
+      }
+    ],
+    "essential": true,
+    "name": "${name}",
+    "image": "akeyless/base",
+    "environment": [
+        { "name" : "CLUSTER_URL", "value" : "https://${var.domain_name}:8000" },
+        { "name" : "CLUSTER_NAME", "value" : "${var.name}" },
+        { "name" : "ADMIN_ACCESS_ID", "value" : "${var.admin_access_id}" },
+        { "name" : "ALLOWED_ACCESS_IDS", "value" : "${var.allowed_access_ids}" },
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/app/${name}",
+        "awslogs-region": "${region}",
+        "awslogs-stream-prefix": "${name}-"
+      }
+    }
+  }
+]
