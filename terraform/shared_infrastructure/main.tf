@@ -8,7 +8,7 @@ module "vpc" {
 }
 
 module "gateway" {
-  source = "./akeyless_gateway"
+  source = "git::https://github.com/cmancone/akeyless-gateway-ecs.git"
 
   name                        = var.name
   vpc_id                      = module.vpc.id

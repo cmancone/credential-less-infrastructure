@@ -49,6 +49,12 @@ variable "akeyless_gateway_allowed_access_ids" {
   description = "The access ids that can be used to configure the AKeyless Gateway (see https://docs.akeyless.io/docs/install-and-configure-the-gateway)"
 }
 
+variable "akeyless_gateway_desired_task_count" {
+  type        = number
+  description = "The desired number of ECS tasks to run for the gateway"
+  default     = 1
+}
+
 variable "alb_access_logs_bucket_name" {
   type        = string
   description = "The name of the S3 bucket to store access logs for the ALB in"
