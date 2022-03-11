@@ -3,7 +3,7 @@ variable "name" {
   description = "The name for this shared infrastructure"
 
   validation {
-    condition     = length(var.name) > 32
+    condition     = length(var.name) <= 32
     error_message = "The name must be 32 characters or less to comply with ALB naming requirements."
   }
 
@@ -11,6 +11,11 @@ variable "name" {
     condition     = can(regex("^[0-9A-Za-z-]+$", var.name))
     error_message = "The name can only contain letters, numbers, and hyphens in order to comply with ALB naming requirements."
   }
+}
+
+variable "region" {
+  type        = string
+  description = "The region that the infrastructure is destined for"
 }
 
 variable "availability_zone_names" {

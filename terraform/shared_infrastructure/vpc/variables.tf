@@ -8,6 +8,12 @@ variable "availability_zone_names" {
   description = "List of availability zone names to put the VPC in"
 }
 
+variable "single_nat_gateway" {
+  type        = bool
+  description = "Whether or not to use a single NAT gateway"
+  default     = true
+}
+
 variable "vpc_flow_log_bucket_name" {
   type        = string
   description = "Name for an S3 bucket to send VPC flow logs to (the bucket itself is not created automatically)"

@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+    }
+  }
+}
+
 module "vpc" {
   source = "./vpc"
 
@@ -11,6 +19,7 @@ module "gateway" {
   source = "git::https://github.com/cmancone/akeyless-gateway-ecs.git"
 
   name                        = var.name
+  region                      = var.region
   vpc_id                      = module.vpc.id
   public_subnet_ids           = module.vpc.public_subnet_ids
   private_subnet_ids          = module.vpc.private_subnet_ids

@@ -12,7 +12,7 @@ module "vpc" {
   enable_dns_support   = true
   enable_dns_hostnames = true
   enable_nat_gateway   = true
-  single_nat_gateway   = false
+  single_nat_gateway   = var.single_nat_gateway
 
   tags = merge(
     { "Name" = var.name },
@@ -29,5 +29,5 @@ resource "aws_flow_log" "aws_flowlogs" {
 }
 
 resource "aws_default_security_group" "default" {
-  vpc_id = module.vpc.id
+  vpc_id = module.vpc.vpc_id
 }
