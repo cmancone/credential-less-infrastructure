@@ -32,6 +32,7 @@ module "primary_region" {
   akeyless_gateway_domain_name        = var.primary_region_domain_name
   akeyless_gateway_iam_role_arn       = var.akeyless_gateway_iam_role_arn
   akeyless_gateway_admin_access_id    = var.akeyless_gateway_admin_access_id
+  akeyless_gateway_admin_access_key   = var.akeyless_gateway_admin_access_key
   akeyless_gateway_allowed_access_ids = var.akeyless_gateway_allowed_access_ids
   akeyless_gateway_desired_task_count = var.akeyless_gateway_desired_task_count
 

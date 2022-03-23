@@ -23,6 +23,18 @@ variable "akeyless_gateway_admin_access_id" {
   description = "The access id that the AKeyless Gateway will use for admin access (see https://docs.akeyless.io/docs/install-and-configure-the-gateway)"
 }
 
+variable "akeyless_gateway_admin_access_key" {
+  type        = string
+  description = "The access key that the gateway will use to authenticate itself to AKeyless.  Use if 'admin_access_id' corresponds to an API key"
+  default     = ""
+}
+
+variable "akeyless_gateway_admin_password" {
+  type        = string
+  description = "Password, relevant only when using an email address as your authentication method (which I don't recommend)."
+  default     = ""
+}
+
 variable "akeyless_gateway_allowed_access_ids" {
   type        = string
   description = "The access ids that can be used to configure the AKeyless Gateway (see https://docs.akeyless.io/docs/install-and-configure-the-gateway)"

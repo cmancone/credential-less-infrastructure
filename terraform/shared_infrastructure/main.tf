@@ -27,6 +27,8 @@ module "gateway" {
   domain_name                 = var.akeyless_gateway_domain_name
   iam_role_arn                = var.akeyless_gateway_iam_role_arn
   admin_access_id             = var.akeyless_gateway_admin_access_id
+  admin_access_key            = var.akeyless_gateway_admin_access_key
+  admin_password              = var.akeyless_gateway_admin_password
   allowed_access_ids          = var.akeyless_gateway_allowed_access_ids
   alb_access_logs_bucket_name = var.alb_access_logs_bucket_name
   desired_task_count          = var.akeyless_gateway_desired_task_count
