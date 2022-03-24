@@ -6,9 +6,9 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "always-upgrade-terraform-state"
-    key    = "shared_infrastructure.json"
-    region = "us-east-1"
+    bucket = "my-state-bucket"
+    key    = "my-state-file.json"
+    region = var.primary_region
   }
 }
 
