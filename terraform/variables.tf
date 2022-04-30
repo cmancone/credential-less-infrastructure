@@ -13,14 +13,24 @@ variable "name" {
   }
 }
 
-variable "akeyless_gateway_iam_role_arn" {
+variable "aws_role_arn_for_producer" {
   type        = string
-  description = "The ARN of the IAM role to attach to the gateway.  Should correspond to the bound ARN of the admin access id."
+  description = "The ARN for the AWS role that the gateway will generate temporary credentials for."
 }
 
-variable "akeyless_gateway_admin_access_id" {
+variable "akeyless_folder" {
   type        = string
-  description = "The access id that the AKeyless Gateway will use for admin access (see https://docs.akeyless.io/docs/install-and-configure-the-gateway)"
+  description = "The folder where all of our AKeyless resources will live."
+}
+
+variable "akeyless_gateway_iam_role_name" {
+  type        = string
+  description = "The name of the IAM role to create and attach to the gateway."
+}
+
+variable "akeyless_gateway_akeyless_role_name" {
+  type        = string
+  description = "The name of the role in AKeyless to grant the gateway access to"
 }
 
 variable "akeyless_gateway_admin_access_key" {
@@ -66,20 +76,20 @@ variable "primary_region_availability_zone_names" {
   description = "List of availability zone names to use in the 'primary' region"
 }
 
-variable "secondary_region" {
-  type        = string
-  description = "The AWS region to use for the 'secondary' cluster deployment"
-}
-
-variable "secondary_region_domain_name" {
-  type        = string
-  description = "The name of the domain to host the gateway on in the 'secondary' region"
-}
-
-variable "secondary_region_availability_zone_names" {
-  type        = list(string)
-  description = "List of availability zone names to use in the 'secondary' region"
-}
+# variable "secondary_region" {
+#   type        = string
+#   description = "The AWS region to use for the 'secondary' cluster deployment"
+# }
+#
+# variable "secondary_region_domain_name" {
+#   type        = string
+#   description = "The name of the domain to host the gateway on in the 'secondary' region"
+# }
+#
+# variable "secondary_region_availability_zone_names" {
+#   type        = list(string)
+#   description = "List of availability zone names to use in the 'secondary' region"
+# }
 
 variable "vpc_flow_log_bucket_name" {
   type        = string

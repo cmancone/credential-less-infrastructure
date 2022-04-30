@@ -18,6 +18,11 @@ variable "region" {
   description = "The region that the infrastructure is destined for"
 }
 
+variable "aws_role_arn_for_producer" {
+  type        = string
+  description = "The ARN for the AWS role that the gateway will generate temporary credentials for."
+}
+
 variable "availability_zone_names" {
   type        = list(string)
   description = "List of availability zone names to use"
@@ -39,14 +44,19 @@ variable "akeyless_gateway_domain_name" {
   description = "The name of the domain to host the gateway on"
 }
 
-variable "akeyless_gateway_iam_role_arn" {
+variable "akeyless_folder" {
   type        = string
-  description = "The ARN of the IAM role to attach to the gateway.  Should correspond to the bound ARN of the admin access id."
+  description = "The folder where all of our AKeyless resources will live."
 }
 
-variable "akeyless_gateway_admin_access_id" {
+variable "akeyless_gateway_iam_role_name" {
   type        = string
-  description = "The access id that the AKeyless Gateway will use for admin access (see https://docs.akeyless.io/docs/install-and-configure-the-gateway)"
+  description = "The name of the IAM role to create and attach to the gateway."
+}
+
+variable "akeyless_gateway_akeyless_role_name" {
+  type        = string
+  description = "The name of the role in AKeyless to grant the gateway access to"
 }
 
 variable "akeyless_gateway_admin_access_key" {
