@@ -2,16 +2,7 @@ provider "akeyless" {
   alias = "global-cloud"
 
   aws_iam_login {
-    access_id = "p-1hmqj3uqfkge"
-  }
-}
-
-provider "akeyless" {
-  alias               = "gateway"
-  api_gateway_address = "https://us.gateway.akeyless.always-upgrade.us:8081"
-
-  aws_iam_login {
-    access_id = "p-1hmqj3uqfkge"
+    access_id = var.akeyless_aws_iam_access_id
   }
 }
 
@@ -36,6 +27,11 @@ resource "akeyless_associate_role_auth_method" "gateway_role_attachment" {
   depends_on = [akeyless_auth_method_aws_iam.gateway_auth]
 }
 
+/*
+###
+### These will only work after our Gateway exists
+###
+
 # add an AWS target pointing at the Gateways IAM credentials
 resource "akeyless_target_aws" "target_aws_self" {
   provider = akeyless.gateway
@@ -44,8 +40,18 @@ resource "akeyless_target_aws" "target_aws_self" {
   name                  = "${var.akeyless_folder}/gateway-self"
   use_gw_cloud_identity = true
 
-  depends_on = [akeyless_auth_method_aws_iam.gateway_auth]
+  depends_on = [akeyless_auth_method_aws_iam.gateway_auth, module.gateway]
 }
+
+provider "akeyless" {
+  alias               = "gateway"
+  api_gateway_address = "https://${var.akeyless_gateway_domain_name}:8081"
+
+  aws_iam_login {
+    access_id = var.akeyless_aws_iam_access_id
+  }
+}
+
 
 # add an AWS producer to generate admin credentials
 resource "akeyless_producer_aws" "admin" {
@@ -57,4 +63,7 @@ resource "akeyless_producer_aws" "admin" {
   region                       = var.region
   aws_role_arns                = var.aws_role_arn_for_producer
   aws_user_programmatic_access = true
+
+  depends_on = [module.gateway]
 }
+*/

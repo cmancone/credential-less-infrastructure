@@ -29,6 +29,7 @@ module "primary_region" {
   availability_zone_names   = var.primary_region_availability_zone_names
   route_53_hosted_zone_name = var.route_53_hosted_zone_name
 
+  akeyless_aws_iam_access_id          = var.akeyless_aws_iam_access_id
   aws_role_arn_for_producer           = var.aws_role_arn_for_producer
   akeyless_gateway_domain_name        = var.primary_region_domain_name
   akeyless_gateway_iam_role_name      = var.akeyless_gateway_iam_role_name

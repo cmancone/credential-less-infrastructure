@@ -7,6 +7,9 @@ route_53_hosted_zone_name = "always-upgrade.us"
 # The ARN for the AWS role that our gateway/producer will generate temporary credentials for
 aws_role_arn_for_producer = "arn:aws:iam::431503237549:role/admin"
 
+# The AWS IAM auth access id that terraform should use to login to AKeyless with
+akeyless_aws_iam_access_id = "p-1hmqj3uqfkge"
+
 # The folder in AKeyless that everything for our service lives under
 akeyless_folder = "/services/products/production"
 
@@ -33,3 +36,8 @@ primary_region_availability_zone_names = ["us-east-1a", "us-east-1b", "us-east-1
 
 # Any tags that you would like to attach to the resources.
 tags = {}
+
+# our repository access map
+repository_access = [
+  { "claim" : "repository=", "auth_method" : "" }
+]

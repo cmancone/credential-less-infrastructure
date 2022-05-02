@@ -18,6 +18,11 @@ variable "aws_role_arn_for_producer" {
   description = "The ARN for the AWS role that the gateway will generate temporary credentials for."
 }
 
+variable "akeyless_aws_iam_access_id" {
+  type        = string
+  description = "The access id that terraform should use to login to AKeyless (expects AWS IAM auth)"
+}
+
 variable "akeyless_folder" {
   type        = string
   description = "The folder where all of our AKeyless resources will live."

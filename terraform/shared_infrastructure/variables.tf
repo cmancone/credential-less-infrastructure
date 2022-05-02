@@ -39,6 +39,11 @@ variable "route_53_hosted_zone_name" {
   description = "The name of the Route53 hosted zone that the gateway domain will belong to"
 }
 
+variable "akeyless_aws_iam_access_id" {
+  type        = string
+  description = "The access id that terraform should use to login to AKeyless (expects AWS IAM auth)"
+}
+
 variable "akeyless_gateway_domain_name" {
   type        = string
   description = "The name of the domain to host the gateway on"

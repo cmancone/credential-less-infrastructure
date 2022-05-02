@@ -28,17 +28,22 @@ output "cidr_block" {
   description = "The CIDR block for the VPC"
 }
 
-output "aws_target_gateway_own_credentials" {
-  value       = akeyless_target_aws.target_aws_self.name
-  description = "The name of the AWS target that corresponds to the gateways own credentials"
-}
-
 output "gateway_iam_auth_access_id" {
   value       = akeyless_auth_method_aws_iam.gateway_auth.access_id
   description = "The Access ID of the gateway's IAM auth method"
+}
+
+/*
+###
+### These will only work after we uncomment the bottom half of akeyless.tf
+###
+output "aws_target_gateway_own_credentials" {
+  value       = akeyless_target_aws.target_aws_self.name
+  description = "The name of the AWS target that corresponds to the gateways own credentials"
 }
 
 output "aws_producer_name" {
   value       = akeyless_producer_aws.admin.name
   description = "The path to the AWS producer"
 }
+*/
