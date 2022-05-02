@@ -39,5 +39,8 @@ tags = {}
 
 # our repository access map
 repository_access = [
-  { "claim" : "repository=", "auth_method" : "" }
+  {
+    "sub_claims" : { repository = "cmancone/credential-less-1-infrastructure" },
+    "auth_method" : "/services/products/production/admin"
+  }
 ]

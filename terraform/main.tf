@@ -42,3 +42,9 @@ module "primary_region" {
   alb_access_logs_bucket_name = var.alb_access_logs_bucket_name
   tags                        = var.tags
 }
+
+module "github_repo_authentication" {
+  source                     = "./github_auth"
+  repository_access          = var.repository_access
+  akeyless_aws_iam_access_id = var.akeyless_aws_iam_access_id
+}

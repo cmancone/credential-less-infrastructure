@@ -33,7 +33,6 @@ output "gateway_iam_auth_access_id" {
   description = "The Access ID of the gateway's IAM auth method"
 }
 
-/*
 ###
 ### These will only work after we uncomment the bottom half of akeyless.tf
 ###
@@ -46,4 +45,3 @@ output "aws_producer_name" {
   value       = module.primary_region.gateway_iam_auth_access_id
   description = "The Access ID of the gateway's IAM auth method"
 }
-*/

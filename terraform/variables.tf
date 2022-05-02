@@ -113,3 +113,8 @@ variable "tags" {
   description = "Tags to attach to all resources"
   default     = {}
 }
+
+variable "repository_access" {
+  type        = list(any)
+  description = "The repository access list"
+}

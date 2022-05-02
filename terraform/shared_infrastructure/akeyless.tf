@@ -27,7 +27,6 @@ resource "akeyless_associate_role_auth_method" "gateway_role_attachment" {
   depends_on = [akeyless_auth_method_aws_iam.gateway_auth]
 }
 
-/*
 ###
 ### These will only work after our Gateway exists
 ###
@@ -66,4 +65,3 @@ resource "akeyless_producer_aws" "admin" {
 
   depends_on = [module.gateway]
 }
-*/
