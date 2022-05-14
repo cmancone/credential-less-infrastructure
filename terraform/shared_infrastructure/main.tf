@@ -30,7 +30,7 @@ module "gateway-ecs" {
   route_53_hosted_zone_name   = var.route_53_hosted_zone_name
   domain_name                 = "us-ecs.gateway.akeyless.always-upgrade.us"
   iam_role_name               = var.akeyless_gateway_iam_role_name
-  admin_access_id             = "p-ye7gykge4tuj"
+  admin_access_id             = akeyless_auth_method_aws_iam.gateway_auth.access_id
   allowed_access_ids          = var.akeyless_gateway_allowed_access_ids
   alb_access_logs_bucket_name = var.alb_access_logs_bucket_name
   desired_task_count          = var.akeyless_gateway_desired_task_count
