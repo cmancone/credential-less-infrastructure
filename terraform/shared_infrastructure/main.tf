@@ -28,7 +28,7 @@ module "gateway-ecs" {
   public_subnet_ids           = module.vpc.public_subnet_ids
   private_subnet_ids          = module.vpc.private_subnet_ids
   route_53_hosted_zone_name   = var.route_53_hosted_zone_name
-  domain_name                 = "us-ecs.gateway.akeyless.always-upgrade.us"
+  domain_name                 = var.akeyless_gateway_domain_name
   iam_role_name               = var.akeyless_gateway_iam_role_name
   admin_access_id             = akeyless_auth_method_aws_iam.gateway_auth.access_id
   allowed_access_ids          = var.akeyless_gateway_allowed_access_ids
