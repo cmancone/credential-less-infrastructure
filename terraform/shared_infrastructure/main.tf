@@ -19,29 +19,10 @@ module "vpc" {
   tags                     = var.tags
 }
 
-module "gateway" {
-  source = "./ec2_gateway"
-
-  name                      = var.name
-  region                    = var.region
-  vpc_id                    = module.vpc.id
-  public_subnet_ids         = module.vpc.public_subnet_ids
-  subnet_id                 = module.vpc.private_subnet_ids[0]
-  route_53_hosted_zone_name = var.route_53_hosted_zone_name
-  domain_name               = var.akeyless_gateway_domain_name
-  iam_role_name             = "akeyless-gateway-ecs"
-  admin_access_id           = akeyless_auth_method_aws_iam.gateway_auth.access_id
-  allowed_access_ids        = var.akeyless_gateway_allowed_access_ids
-  tags                      = var.tags
-
-  depends_on = [akeyless_associate_role_auth_method.gateway_role_attachment]
-}
-
-
 module "gateway-ecs" {
   source = "git::https://github.com/cmancone/akeyless-gateway-ecs.git"
 
-  name                        = "products-ecs"
+  name                        = var.name
   region                      = var.region
   vpc_id                      = module.vpc.id
   public_subnet_ids           = module.vpc.public_subnet_ids
