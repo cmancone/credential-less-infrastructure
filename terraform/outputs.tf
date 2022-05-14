@@ -33,6 +33,11 @@ output "gateway_iam_auth_access_id" {
   description = "The Access ID of the gateway's IAM auth method"
 }
 
+output "github_access_id" {
+  value       = module.github_repo_authentication.github_access_id
+  description = "The Access ID of the OAuth2 method to be used by Github Actions"
+}
+
 ###
 ### These will only work after we uncomment the bottom half of akeyless.tf
 ###
