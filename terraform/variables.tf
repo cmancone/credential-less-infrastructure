@@ -28,11 +28,6 @@ variable "akeyless_folder" {
   description = "The folder where all of our AKeyless resources will live."
 }
 
-variable "akeyless_gateway_iam_role_name" {
-  type        = string
-  description = "The name of the IAM role to create and attach to the gateway."
-}
-
 variable "akeyless_gateway_akeyless_role_name" {
   type        = string
   description = "The name of the role in AKeyless to grant the gateway access to"
