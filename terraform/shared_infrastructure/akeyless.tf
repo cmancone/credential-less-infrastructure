@@ -30,7 +30,7 @@ resource "akeyless_associate_role_auth_method" "gateway_role_attachment" {
 ###
 ### These will only work after our Gateway exists
 ###
-
+/*
 # add an AWS target pointing at the Gateways IAM credentials
 resource "akeyless_target_aws" "target_aws_self" {
   provider = akeyless.gateway
@@ -65,3 +65,4 @@ resource "akeyless_producer_aws" "admin" {
 
   depends_on = [module.gateway]
 }
+*/
