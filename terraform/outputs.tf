@@ -48,7 +48,7 @@ output "aws_target_gateway_own_credentials" {
 }
 
 output "aws_producer_name" {
-  value       = module.primary_region.gateway_iam_auth_access_id
-  description = "The Access ID of the gateway's IAM auth method"
+  value       = module.primary_region.aws_producer_name
+  description = "The path to the AWS producer"
 }
 */

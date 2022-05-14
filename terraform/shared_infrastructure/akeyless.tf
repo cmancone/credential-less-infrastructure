@@ -39,7 +39,7 @@ resource "akeyless_target_aws" "target_aws_self" {
   name                  = "${var.akeyless_folder}/gateway-self"
   use_gw_cloud_identity = true
 
-  depends_on = [akeyless_auth_method_aws_iam.gateway_auth, module.gateway]
+  depends_on = [akeyless_auth_method_aws_iam.gateway_auth, module.gateway-ecs]
 }
 
 provider "akeyless" {
@@ -63,6 +63,6 @@ resource "akeyless_producer_aws" "admin" {
   aws_role_arns                = var.aws_role_arn_for_producer
   aws_user_programmatic_access = true
 
-  depends_on = [module.gateway]
+  depends_on = [module.gateway-ecs]
 }
 */
