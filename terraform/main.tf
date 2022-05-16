@@ -47,4 +47,5 @@ module "github_repo_authentication" {
   source                     = "./github_auth"
   repository_access          = var.repository_access
   akeyless_aws_iam_access_id = var.akeyless_aws_iam_access_id
+  github_auth_name           = "${var.akeyless_folder}/github"
 }

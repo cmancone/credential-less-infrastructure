@@ -1,7 +1,6 @@
 variable "github_auth_name" {
   type        = string
   description = "The name of the Github auth method to create"
-  default     = "/shared/github"
 }
 
 variable "unique_identifier" {

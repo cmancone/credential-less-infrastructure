@@ -1,0 +1,54 @@
+on: push
+env:
+  access_id: p-123456789012
+  producer_name: /path/to/aws/provider
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Terraform Plan
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Login to AWS
+        id: fetch-secrets
+        uses: cmancone/akeyless-action@v1
+        with:
+          access-id: ${{ env.access_id }}
+          producer-for-aws-access: ${{ env.producer_name }}
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v1
+      - name: Init
+        id: terraform-init
+        run: cd ./terraform && terraform init
+      - name: Plan
+        id: terraform-plan
+        run: cd ./terraform && terraform plan -no-color
+  deploy:
+    if: github.ref == ${{ github.event.repository.default_branch }}
+    needs: [test]
+    runs-on: ubuntu-latest
+    name: Deploy
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Login to AWS
+        id: fetch-secrets
+        uses: cmancone/akeyless-action@v1
+        with:
+          access-id: ${{ env.access_id }}
+          producer-for-aws-access: ${{ env.producer_name }}
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v1
+      - name: Init
+        id: terraform-init
+        run: cd ./terraform && terraform init
+      - name: Deploy
+        id: terraform-deploy
+        run: cd ./terraform && terraform apply --auto-approve
