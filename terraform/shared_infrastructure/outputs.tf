@@ -37,9 +37,9 @@ output "gateway_iam_auth_access_id" {
 ### These will only work after we uncomment the bottom half of akeyless.tf
 ###
 /*
-output "aws_target_gateway_own_credentials" {
-  value       = akeyless_target_aws.target_aws_self.name
-  description = "The name of the AWS target that corresponds to the gateways own credentials"
+output "aws_target_gateway" {
+  value       = akeyless_target_aws.target_aws.name
+  description = "The name of the AWS target for AWS producers to use"
 }
 
 output "aws_producer_name" {

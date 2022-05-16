@@ -42,9 +42,9 @@ output "github_access_id" {
 ### These will only work after we uncomment the bottom half of akeyless.tf
 ###
 /*
-output "aws_target_gateway_own_credentials" {
-  value       = module.primary_region.aws_target_gateway_own_credentials
-  description = "The name of the AWS target that corresponds to the gateways own credentials"
+output "aws_target_gateway" {
+  value       = module.primary_region.aws_target_gateway
+  description = "The name of the AWS target for AWS producers to use"
 }
 
 output "aws_producer_name" {
