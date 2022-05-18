@@ -23,9 +23,9 @@ resource "akeyless_auth_method_oauth2" "github" {
 
 
 resource "akeyless_associate_role_auth_method" "gateway_role_attachment" {
-  for_each = { for access in var.repository_access : access.role_name => access.sub_claims }
+  for_each = { for index, access in var.repository_access : index => access }
 
   am_name    = trimprefix(akeyless_auth_method_oauth2.github[0].name, "/")
-  role_name  = trimprefix(each.key, "/")
-  sub_claims = each.value
+  role_name  = trimprefix(each.value.role_name, "/")
+  sub_claims = each.value.sub_claims
 }
